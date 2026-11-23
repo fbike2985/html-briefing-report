@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<title>{{REPORT_TITLE}}</title>
+<style>
+{{GITHUB_REPORT_CSS}}
+</style>
+</head>
+<body data-style="{{STYLE_KEY}}">
+<a class="skip" href="#main">跳到正文</a>
+<header><div class="wrap hero"><div class="hero-main"><h1>{{REPORT_TITLE}}</h1><p class="subtitle">{{DECISION_LEDE}}</p></div><aside class="hero-rail" aria-label="关键结论"><p class="rail-title">关键结论</p><div class="key-points">{{KEY_POINTS}}</div></aside></div></header>
+<nav aria-label="页面目录"><div class="wrap">{{NAV_ITEMS}}</div></nav>
+<main id="main" class="wrap">
+<section id="conclusion"><div class="section-head"><h2>结论</h2></div><p class="lead">{{CONCLUSION}}</p>{{SUMMARY_BLOCK}}{{DIAGRAM_BLOCK}}</section>
+{{REPORT_SECTIONS}}
+</main>
+<footer><div class="wrap">{{FOOTER}}</div></footer>
+</body>
+</html>
