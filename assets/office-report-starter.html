@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<title>{{REPORT_TITLE}}</title>
+<style>
+{{GITHUB_REPORT_CSS}}
+</style>
+</head>
+<body data-style="{{STYLE_KEY}}">
+<a class="skip" href="#main">跳到正文</a>
+<header><div class="wrap hero"><div class="hero-main"><h1>{{REPORT_TITLE}}</h1><p class="subtitle">{{REPORT_SCOPE}}</p><div class="scope-strip">{{SCOPE_ITEMS}}</div></div><aside class="hero-rail" aria-label="关键结果"><p class="rail-title">关键结果</p><div class="key-points">{{KEY_POINTS}}</div></aside></div></header>
+<nav aria-label="页面目录"><div class="wrap">{{NAV_ITEMS}}</div></nav>
+<main id="main" class="wrap">
+<section id="conclusion"><div class="section-head"><h2>结论</h2></div><p class="lead">{{CONCLUSION}}</p><div class="kpi-grid">{{KPI_CARDS}}</div></section>
+<section id="performance"><div class="section-head"><h2>目标与趋势</h2><p>{{PERFORMANCE_SUMMARY}}</p></div><div class="chart-card"><div class="chart-title"><div><h3>{{CHART_TITLE}}</h3><p>{{CHART_SUBTITLE}}</p></div><span class="tag neutral">{{CHART_UNIT}}</span></div>{{CHART_BLOCK}}<p class="chart-note">{{CHART_NOTE}}</p></div></section>
+<section id="drivers"><div class="section-head"><h2>变化来源</h2><p>{{DRIVER_SUMMARY}}</p></div><div class="insight-grid">{{DRIVER_BLOCKS}}</div></section>
+<section id="exceptions"><div class="section-head"><h2>异常与风险</h2></div><div class="table-wrap">{{EXCEPTION_TABLE}}</div></section>
+<section id="actions"><div class="section-head"><h2>行动项</h2></div><div class="table-wrap">{{ACTION_TABLE}}</div></section>
+<section id="data-notes"><div class="section-head"><h2>数据说明</h2></div><p class="lead">{{DATA_NOTES}}</p></section>
+</main><footer><div class="wrap">{{FOOTER}}</div></footer>
+</body>
+</html>

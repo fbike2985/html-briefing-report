@@ -1,3 +1,3 @@
 interface:
-  display_name: "HTML 汇报报告"
-  short_description: "生成结论前置、证据清晰、单文件可分享的通用 HTML 汇报"
+  display_name: "HTML 汇报与数据报告"
+  short_description: "生成结论前置、口径清晰、单文件可分享的 HTML 汇报与办公数据报告"

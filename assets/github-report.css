@@ -30,3 +30,11 @@ body[data-style="minimal"]{--blue-bg:#eff6ff;--blue-border:#bfdbfe;--green-bg:#f
 body[data-style="research"]{--blue-bg:#f3e7e4;--blue-border:#b98d85;--green-bg:#e8f0ed;--green-border:#9bb4ab;--amber-bg:#f3ead2;--amber-border:#c7ad73;--code:#f4f1e8}
 body[data-style="dashboard"]{--blue-bg:#e8efff;--blue-border:#9bb4ef;--green-bg:#e6f4f1;--green-border:#8dc5b8;--amber-bg:#fff4df;--amber-border:#e3bf7b;--code:#f5f8fb}
 body[data-style="gallery"]{--blue-bg:#e7f5f2;--blue-border:#88c8bb;--green-bg:#edf8ee;--green-border:#a5d6aa;--amber-bg:#fff3dd;--amber-border:#e7bf79;--code:#eceff3}
+
+/* Office data report utilities */
+.scope-strip{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}.scope-strip span{display:inline-flex;align-items:center;min-height:28px;padding:2px 9px;background:var(--surface-2);border:1px solid var(--line);border-radius:4px;color:var(--muted);font-size:.78rem;font-weight:650}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.kpi{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:14px}.kpi.primary{border-top:3px solid var(--blue)}.kpi .label{color:var(--soft);font-size:.75rem;font-weight:700}.kpi .value{margin-top:5px;font-size:1.45rem;font-weight:750;font-variant-numeric:tabular-nums slashed-zero}.kpi .compare{margin-top:3px;color:var(--muted);font-size:.78rem}.delta-up{color:var(--green)!important}.delta-down{color:var(--red)!important}.delta-flat{color:var(--muted)!important}
+.chart-card{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:16px}.chart-title{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:12px}.chart-title p{margin:3px 0 0;color:var(--muted);font-size:.84rem}.chart-note{margin:10px 0 0;color:var(--soft);font-size:.78rem}
+.insight-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.insight{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:15px}.insight h3{margin:0 0 6px}.insight p,.insight li{color:var(--muted);font-size:.88rem}.insight ul{margin:6px 0 0;padding-left:1.15em}
+.action-table td:last-child,.action-table td:nth-last-child(2){white-space:nowrap}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.insight-grid{grid-template-columns:1fr}}@media(max-width:560px){.kpi-grid{grid-template-columns:1fr}}

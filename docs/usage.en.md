@@ -20,7 +20,7 @@ Open a new session and confirm that `html-briefing-report` appears in the availa
 
 ## 2. Invoke
 
-The skill is selected for requests such as HTML briefings, audits, research reports, project reviews, test reports, technical proposals, source comparisons, and data evidence reports.
+The skill is selected for HTML briefings, operating reviews, monthly and quarterly reports, sales and budget analyses, project and test reviews, research reports, audits, technical proposals, and source comparisons.
 
 Explicit invocation also works:
 
@@ -44,6 +44,20 @@ Constraints: English copy, highlighted code, mobile-friendly tables, no process 
 
 The skill first resolves facts from the supplied files and context.
 
+## 3A. Office data input
+
+Provide the period, entity, metrics, units, target or comparison baseline, data source, and decision. Example:
+
+```text
+Period: October 2026; compare with September 2026 and the full-year target.
+Entities: East, South, and North regions.
+Metrics: revenue, orders, average order value, and target attainment.
+Sources: sales_2026_10.xlsx.
+Output: conclusion, target gap, region/product contribution, exceptions, and actions.
+```
+
+If a workbook contains multiple sheets or competing definitions, name the primary sheet before analysis. More prompts are in [examples/prompts.en.md](../examples/prompts.en.md).
+
 ## 4. Choose a visual system
 
 | Style | Best for | Character |
@@ -51,7 +65,7 @@ The skill first resolves facts from the supplied files and context.
 | `github` | Technical reports, source audits, API and data comparisons | High information density and strong technical reading rhythm |
 | `minimal` | Short decision documents and one-page summaries | Semantic, restrained, generous spacing |
 | `research` | Long-form analysis and annotated evidence | Editorial typography and source-oriented reading |
-| `dashboard` | Status, metrics, test results, and operations | Clear groups and scan-friendly tables |
+| `dashboard` | Monthly or quarterly operations, sales, budget, project status, tests, and operational metrics | Clear groups and scan-friendly tables |
 | `gallery` | Public-facing research summaries | More expressive presentation for visual material |
 
 `github` is the default. Use `github` for source and dense tabular work, `minimal` for short business briefs, and `research` for long explanatory documents.
@@ -68,6 +82,20 @@ Use this order when the supplied facts support it:
 6. Provenance: versions, hashes, files, endpoints, revisions, or screenshot IDs.
 
 Remove any section that does not carry new facts.
+
+### Office data reports
+
+Use this order:
+
+1. Conclusion: actual, target gap, period movement, main drivers, and decisions needed.
+2. KPI snapshot: actual, target, prior period, year-over-year, unit, and source.
+3. Trend and target: time series, target line, breakpoints, and definition changes.
+4. Driver breakdown: product, region, channel, customer, team, or cost contribution.
+5. Exceptions: decline, concentration, one-off items, and missing coverage.
+6. Actions: owner, deadline, and expected result only when supplied.
+7. Data notes: period, unit, currency, formula, source, and refresh time.
+
+See [references/office-data-reports.md](../references/office-data-reports.md) for detailed metric and chart rules.
 
 ## 6. Code comparison
 
@@ -98,10 +126,15 @@ Use the `diagram-design` skill to select an appropriate process, swimlane, data-
 - Give the SVG `role="img"`, a non-empty `title`, and a non-empty `desc`.
 - Remove decoration that does not carry information.
 
+## 7A. Start from a template
+
+Use [assets/report-starter.html](../assets/report-starter.html) for general reports and [assets/office-report-starter.html](../assets/office-report-starter.html) for office data reports.
+
 ## 8. Validate and preview
 
 ```bash
 python scripts/check_report.py report.html
+python scripts/check_report.py office-report.html --profile data
 python ~/.codex/skills/diagram-design/scripts/self_check.py --offline report.html
 ```
 

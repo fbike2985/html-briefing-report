@@ -2,14 +2,15 @@
 
 [中文](README.md) | [English](README.en.md)
 
-一个面向业务汇报、项目复盘、测试报告、技术方案、调研分析、源码审计与数据取证的通用 HTML 报告技能。
+一个面向办公数据分析、经营汇报、销售与预算分析、项目复盘、测试报告、技术方案、调研分析和源码审计的通用 HTML 报告技能。
 
-它把结论前置、事实核查、来源标注、字段解释、源码对照、GitHub 风格排版、可点击链路图和单文件交付固化为可复用流程。生成结果是单个 `.html`，默认不依赖远程字体、CDN、JavaScript 或图片服务。
+它把结论前置、数据口径、指标解释、趋势与目标对比、来源标注、源码对照、GitHub 风格排版、可点击链路图和单文件交付固化为可复用流程。生成结果是单个 `.html`，默认不依赖远程字体、CDN、JavaScript 或图片服务。
 
 ## 能力
 
 - 首屏先给完整结论，再展开机制、数据和来源。
 - 删除空泛过渡、重复总结、写作过程说明和无法落地的占位话术。
+- 办公数据报告写清统计周期、单位、指标定义、比较基线和数据来源。
 - 数据报告保留原始字段名、通俗含义、来源与数据性质。
 - 源码报告按“触发 → 条件/权限 → 采集 → 组织 → 缓存/去重 → 外发”组织完整链路。
 - 代码使用可读的 Markdown 式代码块，并带语法高亮与阶段对照。
@@ -24,7 +25,7 @@
 | `github` | Primer CSS | 源码审计、工程报告、接口对比、数据报告 |
 | `minimal` | Pico CSS | 简洁的业务简报、单页结论 |
 | `research` | Tufte CSS | 长文分析、旁注、研究型报告 |
-| `dashboard` | Start Bootstrap | 指标、状态、测试与运营摘要 |
+| `dashboard` | Start Bootstrap | 月度/季度经营、销售、预算、状态、测试与运营摘要 |
 | `gallery` | HTML5 UP | 展示型调研成果与对外摘要 |
 
 外部项目仅作为视觉与信息结构参考。最终报告只内嵌实际使用的 CSS，不加载外部框架或 CDN。各项目的许可证与使用边界见 [references/open-source-styles.md](references/open-source-styles.md)。
@@ -66,7 +67,15 @@ npx skills add fbike2985/html-briefing-report
 ```
 
 ```text
-把这份业务调研整理成单文件 HTML，使用 github 风格，数据字段要解释清楚。
+把这份业务调研整理成单文件 HTML，使用 minimal 风格，结论和关键数据先写清楚。
+```
+
+```text
+把本月销售明细、目标、区域和渠道数据整理成 dashboard 风格 HTML 经营报告。
+```
+
+```text
+把预算、实际、预测和部门费用整理成 HTML 预算分析，写清差异来源和行动项。
 ```
 
 你也可以显式调用：
@@ -79,6 +88,27 @@ $html-briefing-report 把下面的材料整理成可直接发送的 HTML 报告�
 
 - [中文使用教程](docs/usage.zh-CN.md)
 - [English usage guide](docs/usage.en.md)
+- [中文办公报告提示词](examples/prompts.zh-CN.md)
+- [English office report prompts](examples/prompts.en.md)
+
+
+## 办公数据报告
+
+适用于月度经营分析、季度复盘、销售目标、预算费用、项目周报、人力组织、客户服务、质量和运营分析。
+
+办公数据报告默认关注：
+
+- 结果：实际值、目标、环比、同比和预算差异。
+- 归因：产品、区域、渠道、客户、团队或成本项的贡献。
+- 异常：集中度、明显下滑、未覆盖数据和高影响问题。
+- 行动：负责人、截止时间、预期效果；材料未提供时不编造。
+- 数据说明：周期、单位、币种、计算方式、来源和刷新时间。
+
+完整的数据口径、图表选择、计算公式和各类办公报告结构见 [references/office-data-reports.md](references/office-data-reports.md)。
+
+## 办公数据模板
+
+办公数据报告从 [assets/office-report-starter.html](assets/office-report-starter.html) 开始。模板包含结论、KPI、目标与趋势、变化来源、异常、行动项和数据说明七个区域，仍按实际材料删减。
 
 ## 新报告模板
 
@@ -106,11 +136,16 @@ html-briefing-report/
 ├─ agents/openai.yaml
 ├─ assets/
 │  ├─ github-report.css
+│  ├─ office-report-starter.html
 │  └─ report-starter.html
 ├─ docs/
 │  ├─ usage.zh-CN.md
 │  └─ usage.en.md
+├─ examples/
+│  ├─ prompts.zh-CN.md
+│  └─ prompts.en.md
 ├─ references/
+│  ├─ office-data-reports.md
 │  ├─ open-source-styles.md
 │  ├─ report-spec.md
 │  └─ source-comparison.md
@@ -122,6 +157,7 @@ html-briefing-report/
 
 ```bash
 python scripts/check_report.py path/to/report.html
+python scripts/check_report.py path/to/office-report.html --profile data
 python ~/.codex/skills/diagram-design/scripts/self_check.py --offline path/to/report.html
 ```
 
@@ -133,11 +169,11 @@ python ~/.codex/skills/diagram-design/scripts/self_check.py --offline path/to/re
 - 内部锚点是否全部可解析；
 - 代码块是否存在语法高亮；
 - SVG 是否具备可访问描述和可点击目标；
-- 是否缺少来源、版本、哈希或源码路径。
+- 是否缺少数据周期、单位、来源、版本、哈希或源码路径。
 
 ## 技能结构
 
-核心入口是 [SKILL.md](SKILL.md)。详细写作规范位于 [references/report-spec.md](references/report-spec.md)，源码链路规范位于 [references/source-comparison.md](references/source-comparison.md)。
+核心入口是 [SKILL.md](SKILL.md)。办公数据报告规范位于 [references/office-data-reports.md](references/office-data-reports.md)，详细写作规范位于 [references/report-spec.md](references/report-spec.md)，源码链路规范位于 [references/source-comparison.md](references/source-comparison.md)。
 
 ## License
 

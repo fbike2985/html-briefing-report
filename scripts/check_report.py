@@ -99,7 +99,7 @@ class Audit(HTMLParser):
             self.current_text.pop()
 
 
-def check(path: Path, allow_scripts: bool, allow_remote: bool, allowed_phrases: list[str]):
+def check(path: Path, allow_scripts: bool, allow_remote: bool, allowed_phrases: list[str], profile: str = 'generic'):
     errors, warnings = [], []
     try:
         source = path.read_text(encoding='utf-8')
@@ -191,11 +191,23 @@ def check(path: Path, allow_scripts: bool, allow_remote: bool, allowed_phrases: 
             errors.append(f'filler or process wording found: {pattern}')
 
     # Rough provenance test: reports should expose either a hash, source path, version, or endpoint.
-    if not re.search(r'\b(?:sha-?256|[0-9a-f]{32,64}|\.java\b|\.kt\b|\.dex\b|https?://|/v\d+|commit|branch|版本)', source, re.I):
+    if not re.search(r'\b(?:sha-?256|[0-9a-f]{32,64}|\.java\b|\.kt\b|\.dex\b|\.xlsx?\b|\.csv\b|https?://|/v\d+|commit|branch|版本)|统计周期|数据源|data source|dataset|workbook', source, re.I):
         warnings.append('no source path, hash, version, endpoint, or revision marker found')
 
     if not re.search(r'@media\s+print', source, re.I):
         warnings.append('no print stylesheet found')
+
+    if profile == 'data':
+        if not re.search(r'(统计周期|时间范围|报告周期|reporting period|period)', visible, re.I):
+            errors.append('data report is missing a reporting period')
+        if not re.search(r'(单位|人民币|美元|USD|CNY|RMB|万元|亿元|unit)', visible, re.I):
+            warnings.append('data report does not state a unit')
+        if not re.search(r'(数据源|来源|系统|导出|source|dataset|database|workbook)', visible, re.I):
+            errors.append('data report is missing a data source')
+        if not re.search(r'(目标|预算|同比|环比|上期|去年同期|baseline|target|budget|year.over.year|month.over.month)', visible, re.I):
+            warnings.append('data report has no stated comparison baseline')
+        if parser.tags.get('table', 0) == 0 and parser.tags.get('svg', 0) == 0:
+            warnings.append('data report has no table or chart')
     if 'font-size' in source and re.search(r'font-size\s*:\s*(?:[0-9]|1[01])px', source, re.I):
         warnings.append('font-size below 12px found; verify diagram or metadata context')
 
@@ -208,9 +220,10 @@ def main():
     ap.add_argument('--allow-scripts', action='store_true')
     ap.add_argument('--allow-remote-assets', action='store_true')
     ap.add_argument('--allow-phrase', action='append', default=[], help='literal banned phrase to allow for this report')
+    ap.add_argument('--profile', choices=('generic','data','source'), default='generic', help='report-specific checks')
     args = ap.parse_args()
     path = Path(args.html_file)
-    errors, warnings = check(path, args.allow_scripts, args.allow_remote_assets, args.allow_phrase)
+    errors, warnings = check(path, args.allow_scripts, args.allow_remote_assets, args.allow_phrase, args.profile)
     for warning in warnings:
         print(f'WARN {warning}')
     for error in errors:

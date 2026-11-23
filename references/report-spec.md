@@ -46,6 +46,10 @@ Use the smallest amount of structure that supports the request.
 - Project review: conclusion → planned versus delivered result → deviations → causes → corrective actions → responsible data or source.
 - Test report: conclusion → scope → test matrix → failure evidence → impact → release or remediation decision.
 - Product or technical proposal: conclusion → current constraint → proposed mechanism → data/request flow → measurable effect → boundary → source notes.
+- Office data report: conclusion → KPI snapshot → trend/target → driver breakdown → exceptions → actions → data notes. For detailed metric, chart, and calculation rules, read `references/office-data-reports.md`.
+- Sales report: conclusion → revenue and volume → target attainment → product/region/channel drivers → pipeline or risk → data notes.
+- Budget report: conclusion → actual versus budget → category variance → fixed/variable and one-off items → forecast → actions.
+- Operations review: conclusion → service or production result → trend → bottleneck → exceptions → owner/action → source notes.
 
 Avoid a table of contents when the page has fewer than six sections. Use a compact sticky navigation only for long reports.
 
@@ -83,6 +87,16 @@ Choose one style family from `references/open-source-styles.md` and keep it cons
 - `themeable`: daisyUI token model for projects that explicitly need several themes.
 
 Style families change typography, surfaces, borders, and density. They do not change the required conclusion-first information architecture. For a self-contained report, implement only the selected tokens locally; do not link a CDN, framework runtime, or remote font.
+
+## 6B. Office data rules
+
+- Define period, entity, unit, currency, aggregation rule, comparison baseline, source, and refresh time.
+- Keep percent, percentage points, counts, money, ratios, and averages distinct.
+- Show enough detail to reconcile totals; label a residual when the total does not equal the visible rows.
+- Use “无记录” for a missing category and explain the coverage; never invent a value.
+- Charts must state the period, unit, baseline, and a one-line takeaway.
+- Separate measured fact, supported explanation, and recommended action.
+- Detailed formulas, report structures, chart selection, and office scenarios are in `references/office-data-reports.md`.
 
 ## 7. Tables and cards
 
